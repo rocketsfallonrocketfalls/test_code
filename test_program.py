@@ -13,8 +13,8 @@ def get_filename(fp, ext=False): # gets filename from a given path removing the 
         return os.path.splitext(fullname)[0]
         
 # FPS val may be float. Better use time instead of frequency.
-def extract_frames(vpath, step=1): # Extracts frames by "step" in ms. 
-    ts_s = 0 # init timestep in seconds.
+def extract_frames(vpath, step=1): # Extracts frames through time steps.
+    ts_s = 0 # init time.
     fname = get_filename(vpath) # vfilename w/o extension. 
     fpath = './videos/' + fname # target path.   
 
@@ -38,7 +38,7 @@ def extract_frames(vpath, step=1): # Extracts frames by "step" in ms.
             cap.release()
             break
 
-        ts_s = ts_s + step # Jump to the next second to collect with 1 FPS.
+        ts_s = ts_s + step # Update timestep for the next collection.
         
 
 if __name__ == "__main__":
@@ -66,8 +66,7 @@ if __name__ == "__main__":
     # Main loop.
     fplist = glob.glob(save_path+'/*') # Get the downloaded file paths.
     for vpath in fplist:
-        ts_s = 0 # init timestep in seconds.
-        step = 1 # timestep in miliseconds for sampling the frames.
+        step = 1 # time step.
         extract_frames(vpath, step)
     
     print('All frames have been extracted. Removing the actual video files.')
