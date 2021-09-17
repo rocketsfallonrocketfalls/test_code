@@ -70,9 +70,8 @@ if __name__ == "__main__":
         step = 1 # timestep in miliseconds for sampling the frames.
         extract_frames(vpath, step)
     
-    shutil.rmtree(save_path)
-
     print('All frames have been extracted. Removing the actual video files.')
+    shutil.rmtree(save_path) # Remove the actual video files.
     print('Please wait...')
     while os.path.exists(save_path):
         pass # Wait for OS to synchronize.
